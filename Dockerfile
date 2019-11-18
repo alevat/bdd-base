@@ -27,13 +27,13 @@ ENV DISPLAY :99
 RUN yum -y install xorg-x11-utils
 
 # Install gcsfuse
-COPY docker/gcsfuse.repo /etc/yum.repos.d/
+COPY gcsfuse.repo /etc/yum.repos.d/
 RUN yum -y update && yum -y install gcsfuse
 
 # Common configuration for BDD
 ENV SERENITY_OUTPUT_BUCKET build-reports.k8s.alevat.com
-COPY docker/init.gradle /root/.gradle/init.gradle
-COPY docker/run-tests.sh ./
+COPY init.gradle /root/.gradle/init.gradle
+COPY run-tests.sh ./
 
 # Run tests
 CMD ["./run-tests.sh"]

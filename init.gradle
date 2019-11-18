@@ -1,0 +1,8 @@
+allprojects {
+    ext.RepoConfigurator = {
+        maven {
+            url = uri('http://nexus/repository/jcenter/') }
+    }
+    buildscript.repositories RepoConfigurator
+    repositories RepoConfigurator
+}

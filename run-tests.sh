@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Set up output directory in GCP Storage bucket
 SERENITY_OUTPUT_PATH=/mnt/$SERENITY_OUTPUT_BUCKET/$JX_PROJECT_NAME/serenity
 mkdir /mnt/$SERENITY_OUTPUT_BUCKET
@@ -25,5 +27,6 @@ done
 echo
 
 # Run tests via gradlew
-./gradlew --info test
+./gradlew --info test || GRADLE_EXIT_CODE=$?
 cp -R ./target/site/serenity/* $SERENITY_OUTPUT_PATH
+exit $GRADLE_EXIT_CODE
